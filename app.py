@@ -24,6 +24,10 @@ def get_weather_from_api(city):
     except Exception as e:
         print(f"Error: {e}")
     return None
+#открытие страницы
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
