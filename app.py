@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 import time
 
@@ -22,32 +22,37 @@ def get_weather_from_api(city):
         response = requests.get(BASE_URL, params=params)
         if response.status_code == 200:
             return response.json()
-    except Exception as e:
-        print(f"Error: {e}")
+    except Exception:
+        pass
     return None
 #открытие страницы
 @app.route('/', methods= ['GET', 'POST'])
 def index():
     weather = None
-    if requests.method == 'POST':
-        city_raw = requests.form.get('city') #Получаем текст из инпута
+    if request.method == 'POST':
+        city_raw = request.form.get('city') #Получаем текст из инпута
         if city_raw:
             city_key = city_raw.strip().lower() #берем нижний регистр ключа
-            data = get_weather_from_api(city_key) #вызываем api
-            if data:
-                weather = {
-                    'city': data['name'],
-                    'temp': round(data['main']['temp']),
-                    'desc': data['weather'][0]['description']
-                }
+            current_time = time.time()
+            #проверяем кэш
+            if city_key in weather_cache and (current_time - weather_cache[city_key]['time'] < CACHE_TIMEOUT):
+                print(f"LOG: Using cached data for {city_key}")
+                weather = weather_cache[city_key]['data']
 
-                #сохраняем в память
-                current_time = time.time()
-                weather_cache[city_key] = {
-                    'data': weather,
-                    'time': current_time
-                }
-                print(f"LOG: Saved {city_key} to cache")
+            else:
+                # Если в кеше нет или устарело — идем в API
+                print(f"LOG: Fetching new data for {city_key}")
+                data = get_weather_from_api(city_key)
+                if data:
+                    weather = {
+                        'city': data['name'],
+                        'temp': round(data['main']['temp']),
+                        'desc': data['weather'][0]['description']
+                    }
+                    weather_cache[city_key] = {'data': weather, 'time': current_time} #обновим кэш
+
+
+
 
 
 
