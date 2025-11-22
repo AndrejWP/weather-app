@@ -10,7 +10,13 @@
         <input type="text" name="city" placeholder="Введите город" required>
         <button type="submit">Найти</button>
     </form>
-
+{% if weather %}
+        <div style="margin-top: 20px;">
+            <h2>{{ weather.city }}</h2>
+            <p>Температура: {{ weather.temp }} °C</p>
+            <p>Описание: {{ weather.desc }}</p>
+        </div>
+    {% endif %}
 
 </body>
 </html>
