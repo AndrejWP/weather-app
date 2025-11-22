@@ -9,9 +9,21 @@ API_KEY = 'ec589e598b051f59d5a0b8a098a07b61'
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather' #запрос на сервер
 CACHE_TIMEOUT = 300 #5 минут
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+def get_weather_from_api(city):
+    #запрос к OpenWeatherMap
+    params = {
+        'q': city,
+        'appid': API_KEY,
+        'units': 'metric',
+        'lang': 'ru'
+    }
+    try:
+        response = requests.get(BASE_URL, params=params)
+        if response.status_code == 200:
+            return response.json()
+    except Exception as e:
+        print(f"Error: {e}")
+    return None
 
 if __name__ == '__main__':
     app.run(debug=True)
