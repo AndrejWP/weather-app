@@ -29,6 +29,7 @@ def get_weather_from_api(city):
 @app.route('/', methods= ['GET', 'POST'])
 def index():
     weather = None
+    error = None
     if request.method == 'POST':
         city_raw = request.form.get('city') #Получаем текст из инпута
         if city_raw:
