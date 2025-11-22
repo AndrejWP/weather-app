@@ -25,9 +25,25 @@ def get_weather_from_api(city):
         print(f"Error: {e}")
     return None
 #открытие страницы
-@app.route('/')
+@app.route('/', methods= ['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    weather = None
+    if requests.method == 'POST':
+        city = requests.form.get('city') #Получаем текст из инпута
+        if city:
+            data = get_weather_from_api(city) #вызываем api
+            if data:
+                weather = {
+                    'city': data['name'],
+                    'temp': data['main']['temp'],
+                    'desc': data['weather'][0]['description']
+                }
+
+
+
+
+
+    return render_template('index.html', weather = weather)
 
 if __name__ == '__main__':
     app.run(debug=True)
