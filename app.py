@@ -7,8 +7,9 @@ app = Flask(__name__)
 
 API_KEY = 'ec589e598b051f59d5a0b8a098a07b61'
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather' #запрос на сервер
+#настройка кэширования
 CACHE_TIMEOUT = 300 #5 минут
-
+weather_cache = {}   # Пустое хранилище
 def get_weather_from_api(city):
     #запрос к OpenWeatherMap
     params = {
