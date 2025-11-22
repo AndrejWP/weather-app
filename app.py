@@ -5,7 +5,7 @@ import time
 app = Flask(__name__)
 
 
-API_KEY = 'ec589e598b051f59d5a0b8a098a07b61'
+API_KEY = 'bd5e378503939ddaee76f12ad7a97608'
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather' #запрос на сервер
 #настройка кэширования
 CACHE_TIMEOUT = 300 #5 минут
@@ -49,15 +49,16 @@ def index():
                         'temp': round(data['main']['temp']),
                         'desc': data['weather'][0]['description']
                     }
-                    weather_cache[city_key] = {'data': weather, 'time': current_time} #обновим кэш
+                    weather_cache[city_key] = {'data': weather, 'time': current_time} #сохраняем в  кэш
+                else:
+                    error = "Город не найден или ошибка сервиса"
 
 
 
 
 
 
-
-    return render_template('index.html', weather = weather)
+    return render_template('index.html', weather = weather, error = error)
 
 if __name__ == '__main__':
     app.run(debug=True)
