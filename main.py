@@ -1,4 +1,3 @@
-def hello():
-    print("gdfgdf")
+def hello(s):
+    print("hello" + s)
 
-hello()
