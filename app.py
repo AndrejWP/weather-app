@@ -30,16 +30,24 @@ def get_weather_from_api(city):
 def index():
     weather = None
     if requests.method == 'POST':
-        city = requests.form.get('city') #Получаем текст из инпута
-        if city:
-            data = get_weather_from_api(city) #вызываем api
+        city_raw = requests.form.get('city') #Получаем текст из инпута
+        if city_raw:
+            city_key = city_raw.strip().lower() #берем нижний регистр ключа
+            data = get_weather_from_api(city_key) #вызываем api
             if data:
                 weather = {
                     'city': data['name'],
-                    'temp': data['main']['temp'],
+                    'temp': round(data['main']['temp']),
                     'desc': data['weather'][0]['description']
                 }
 
+                #сохраняем в память
+                current_time = time.time()
+                weather_cache[city_key] = {
+                    'data': weather,
+                    'time': current_time
+                }
+                print(f"LOG: Saved {city_key} to cache")
 
 
 
