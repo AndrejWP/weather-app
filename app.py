@@ -48,7 +48,8 @@ def index():
                     weather = {
                         'city': data['name'],
                         'temp': round(data['main']['temp']),
-                        'desc': data['weather'][0]['description']
+                        'desc': data['weather'][0]['description'],
+                        'icon': data['weather'][0]['icon'],
                     }
                     weather_cache[city_key] = {'data': weather, 'time': current_time} #сохраняем в  кэш
                 else:
