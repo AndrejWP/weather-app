@@ -54,3 +54,18 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+.weather-info h2 {
+    font-size: 24px;
+    color: #444;
+}
+.weather-info p {
+    font-size: 18px;
+    color: #555;
+    margin: 5px 0;
+}
+/* Большая иконка температуры */
+.weather-info p:nth-of-type(1) {
+    font-size: 42px;
+    font-weight: bold;
+    color: #222;
+}
