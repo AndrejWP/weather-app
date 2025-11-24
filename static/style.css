@@ -21,3 +21,9 @@ body {
     width: 90%;
     max-width: 400px;
 }
+/* заголовок */
+h1 {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
