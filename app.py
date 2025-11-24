@@ -3,7 +3,7 @@ import requests
 import time
 
 app = Flask(__name__)
-
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 API_KEY = 'bd5e378503939ddaee76f12ad7a97608'
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather' #запрос на сервер
