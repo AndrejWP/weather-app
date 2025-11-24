@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Прогноз Погоды</h1>
+    <div class = "conteiner">
+            <h1>Прогноз Погоды</h1>
     <form method="POST">
         <input type="text" name="city" placeholder="Введите город" required>
         <button type="submit">Найти</button>
@@ -19,6 +20,8 @@
             <p>Описание: {{ weather.desc }}</p>
         </div>
     {% endif %}
+    </div>
+
 
 </body>
 </html>
