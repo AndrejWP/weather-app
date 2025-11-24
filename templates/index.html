@@ -16,9 +16,13 @@
 {% if weather %}
         <div style="margin-top: 20px;">
             <h2>{{ weather.city }}</h2>
-            <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="icon">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="icon">
             <p>Температура: {{ weather.temp }} °C</p>
             <p>Описание: {{ weather.desc }}</p>
+                <div class="details">
+                    <p>Влажность: {{ weather.humidity }}%</p>
+                    <p>Ветер: {{ weather.wind }} м/с</p>
+                </div>
         </div>
     {% endif %}
     </div>
