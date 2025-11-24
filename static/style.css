@@ -69,3 +69,13 @@ button:hover {
     font-weight: bold;
     color: #222;
 }
+/*низ карточки*/
+.details {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #777;
+}
