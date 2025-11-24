@@ -50,6 +50,9 @@ def index():
                         'temp': round(data['main']['temp']),
                         'desc': data['weather'][0]['description'],
                         'icon': data['weather'][0]['icon'],
+                        'humidity': data['main']['humidity'],
+                        'wind': data['wind']['speed']
+
                     }
                     weather_cache[city_key] = {'data': weather, 'time': current_time} #сохраняем в  кэш
                 else:
