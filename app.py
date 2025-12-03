@@ -47,13 +47,15 @@ def index():
                 print(f"LOG: Fetching new data for {city_key}")
                 data = get_weather_from_api(city_key)
                 if data:
+                    icon_code = data['weather'][0]['icon']
                     weather = {
                         'city': data['name'],
                         'temp': round(data['main']['temp']),
                         'desc': data['weather'][0]['description'],
-                        'icon': data['weather'][0]['icon'],
+                        'icon': icon_code,
                         'humidity': data['main']['humidity'],
-                        'wind': data['wind']['speed']
+                        'wind': data['wind']['speed'],
+                        'is_night': 'n' in icon_code
 
                     }
                     weather_cache[city_key] = {'data': weather, 'time': current_time} #сохраняем в  кэш

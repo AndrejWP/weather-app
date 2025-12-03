@@ -180,3 +180,52 @@ button:hover {
     margin-bottom: 15px;
     font-weight: bold;
 }
+/* 1. Темное небо */
+body.night {
+    /* Темно-синий градиент (Космос) */
+    background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
+    color: white; /* Весь текст белый */
+}
+
+/* 2. Звезды (Рисуем их CSS-ом) */
+.stars, .twinkling {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* Днем скрыты */
+}
+
+body.night .stars {
+    display: block;
+    background: #000 url('http://www.script-tutorials.com/demos/360/images/stars.png') repeat top center;
+    z-index: -3; /* Самый задний фон */
+}
+
+body.night .twinkling {
+    display: block;
+    background: transparent url('http://www.script-tutorials.com/demos/360/images/twinkling.png') repeat top center;
+    z-index: -2; /* Поверх звезд, но под облаками */
+    animation: move-twink-back 200s linear infinite;
+}
+
+/* 3. Меняем цвет облаков ночью (чтобы не были слишком яркими) */
+body.night .cloud {
+    background: linear-gradient(to bottom, #cfcfff 5%, #8989a8 100%);
+}
+body.night .cloud:after, body.night .cloud:before {
+    background: #cfcfff;
+}
+
+/* 4. Меняем цвет заголовка ночью */
+body.night h1 {
+    color: #ffd700; /* Золотой цвет луны */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Анимация мерцания звезд */
+@keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
