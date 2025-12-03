@@ -19,7 +19,9 @@ def get_weather_from_api(city):
         'lang': 'ru'
     }
     try:
+
         response = requests.get(BASE_URL, params=params)
+        print(response.json())
         if response.status_code == 200:
             return response.json()
     except Exception:

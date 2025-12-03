@@ -1,3 +1,4 @@
+/* 1. Сброс и базовые настройки */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,77 +6,176 @@
 }
 
 body {
-    font-family: sans-serif;
-    background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); /* Свежий мятный градиент */
-    height: 100vh; /* На всю высоту экрана */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Небесный градиент */
+    background: linear-gradient(to bottom, #89f7fe, #66a6ff);
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden; /* Скрываем полосы прокрутки */
+    position: relative;
 }
+
+/*КОНТЕЙНЕР С ОБЛАКАМИ (ЗАДНИЙ ФОН)
+ */
+#background-wrap {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* !ВАЖНО! Уводим облака на самый задний план */
+    overflow: hidden;
+}
+
+/* Анимация движения */
+@keyframes animateCloud {
+    0% { margin-left: -1000px; }
+    100% { margin-left: 100%; }
+}
+
+/* Рисуем облака */
+.cloud {
+    background: #fff;
+    background: linear-gradient(to bottom,  #fff 5%, #f1f1f1 100%);
+    border-radius: 100px;
+    box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+    height: 120px;
+    position: relative;
+    width: 350px;
+}
+
+.cloud:after, .cloud:before {
+    background: #fff;
+    content: '';
+    position: absolute;
+    z-index: -1;
+}
+
+.cloud:after {
+    border-radius: 100px;
+    height: 100px;
+    left: 50px;
+    top: -50px;
+    width: 100px;
+}
+
+.cloud:before {
+    border-radius: 200px;
+    height: 180px;
+    left: 110px;
+    top: -90px;
+    width: 180px;
+}
+
+/* Размеры и скорость разных облаков */
+.x1 { animation: animateCloud 35s linear infinite; transform: scale(0.65); }
+.x2 { animation: animateCloud 20s linear infinite; transform: scale(0.3); }
+.x3 { animation: animateCloud 30s linear infinite; transform: scale(0.5); }
+.x4 { animation: animateCloud 18s linear infinite; transform: scale(0.4); }
+.x5 { animation: animateCloud 25s linear infinite; transform: scale(0.55); }
+
+/*КАРТОЧКА (ПЕРЕДНИЙ ПЛАН)
+ */
 .container {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background: rgba(255, 255, 255, 0.3); /* Прозрачный белый */
+    backdrop-filter: blur(15px);          /* Размытие фона */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     text-align: center;
     width: 90%;
-    max-width: 400px;
+    max-width: 450px;
+
+    position: relative;
+    z-index: 10;
 }
-/* заголовок */
+
 h1 {
-    color: #333;
-    font-size: 2em;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-bottom: 20px;
+    font-size: 32px;
 }
-/* формат поиска */
+
+/*ЭЛЕМЕНТЫ УПРАВЛЕНИЯ*/
 form {
     display: flex;
     gap: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 20; /* Дополнительная страховка для кнопки */
 }
+
 input {
-    flex-grow: 1;
-    padding: 12px;
-    border: 1px solid #ddd;
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
     border-radius: 8px;
     font-size: 16px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-/* стиль кнопки */
+
 button {
-    padding: 12px 20px;
-    background-color: #007bff;
+    padding: 12px 25px;
+    background-color: #3b82f6; /* Синий цвет */
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    transition: background 0.3s;
+    font-size: 16px;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
 }
+
 button:hover {
-    background-color: #0056b3;
+    background-color: #2563eb;
+    transform: translateY(-2px);
 }
-.weather-info h2 {
-    font-size: 24px;
-    color: #444;
+
+/*ВЫВОД ПОГОДЫ*/
+.weather-info img {
+    width: 100px;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
 }
-.weather-info p {
-    font-size: 18px;
-    color: #555;
-    margin: 5px 0;
+
+.temp {
+    font-size: 64px;
+    font-weight: 700;
+    margin: 0;
+    color: #fff;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-/* Большая иконка температуры */
-.weather-info p:nth-of-type(1) {
-    font-size: 42px;
-    font-weight: bold;
-    color: #222;
+
+.desc {
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #f0f9ff;
+    margin-bottom: 20px;
 }
-/*низ карточки*/
+
 .details {
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
-    color: #777;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    padding-top: 20px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.error-message {
+    background: rgba(255, 82, 82, 0.9);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
