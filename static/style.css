@@ -229,3 +229,48 @@ body.night h1 {
     from {background-position:0 0;}
     to {background-position:-10000px 5000px;}
 }
+/* --- КРУПНАЯ ПОГОДА --- */
+
+/* Контейнер для иконки и цифры */
+.main-weather {
+    display: flex;
+    flex-direction: column; /* Элементы друг под другом */
+    align-items: center;
+    margin: 10px 0;
+}
+
+/* Сама иконка погоды побольше */
+.weather-icon {
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); /* Подсветка иконки */
+}
+
+/* ОГРОМНАЯ ТЕМПЕРАТУРА */
+.temp-big {
+    font-size: 90px; /* Очень крупно */
+    font-weight: 800; /* Очень жирно */
+    line-height: 1;
+    color: #ffffff;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Тень для объема */
+    margin-top: -10px; /* Чуть подтянем к иконке */
+}
+
+/* Описание (Облачно и т.д.) */
+.desc {
+    font-size: 24px;
+    text-transform: capitalize; /* Первая буква заглавная */
+    margin-bottom: 25px;
+    opacity: 0.9;
+    color: #f0f9ff;
+}
+
+/* НОЧНОЙ РЕЖИМ для текста */
+body.night .temp-big {
+    color: #ffd700; /* Золотой цвет цифр ночью */
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6); /* Сильное золотое свечение */
+}
+
+body.night .desc {
+    color: #ddd;
+}
