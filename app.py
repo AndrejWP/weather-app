@@ -5,13 +5,14 @@ import time
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-API_KEY = 'bd5e378503939ddaee76f12ad7a97608'
+API_KEY = 'ec589e598b051f59d5a0b8a098a07b61'
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather' #запрос на сервер
 #настройка кэширования
 CACHE_TIMEOUT = 300 #5 минут
 weather_cache = {}   # Пустое хранилище
+
+
 def get_weather_from_api(city):
-    #запрос к OpenWeatherMap
     params = {
         'q': city,
         'appid': API_KEY,
@@ -19,12 +20,16 @@ def get_weather_from_api(city):
         'lang': 'ru'
     }
     try:
-
         response = requests.get(BASE_URL, params=params)
-        print(response.json())
+        print(f"LOG: Статус ответа API: {response.status_code}")  # <-- Добавили лог
+
         if response.status_code == 200:
             return response.json()
-    except Exception:
+        else:
+            print(f"LOG: Ответ сервера не 200: {response.text}")  # <-- Узнаем, если API ругается
+
+    except Exception as e:  # <-- Важное изменение!
+        print(f"!!! ОШИБКА ВНУТРИ API ФУНКЦИИ: {e}")  # <-- Теперь мы увидим ошибку
         pass
     return None
 #открытие страницы
@@ -36,6 +41,7 @@ def index():
         city_raw = request.form.get('city') #Получаем текст из инпута
         if city_raw:
             city_key = city_raw.strip().lower() #берем нижний регистр ключа
+            print(f"LOG: Ищем город: {city_key}")
             current_time = time.time()
             #проверяем кэш
             if city_key in weather_cache and (current_time - weather_cache[city_key]['time'] < CACHE_TIMEOUT):
