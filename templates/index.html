@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погода</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="{{ 'night' if weather and weather.is_night else '' }}">
+
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <div id="background-wrap">
+        <div class="x1"><div class="cloud"></div></div>
+        <div class="x2"><div class="cloud"></div></div>
+        <div class="x3"><div class="cloud"></div></div>
+        <div class="x4"><div class="cloud"></div></div>
+        <div class="x5"><div class="cloud"></div></div>
+    </div>
+
+    <div class = "container">
+            <h1>Прогноз Погоды</h1>
+    <form method="POST">
+        <input type="text" name="city" placeholder="Введите город" required>
+        <button type="submit">Найти</button>
+    </form>
+{% if weather %}
+        <div class="weather-info">
+            <h2>{{ weather.city }}</h2>
+
+            <!-- Иконка и Градусы рядом или друг под другом -->
+            <div class="main-weather">
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@4x.png" alt="icon" class="weather-icon">
+                <!-- ОГРОМНАЯ ЦИФРА -->
+                <div class="temp-big">{{ weather.temp }}°</div>
+            </div>
+
+            <!-- Описание погоды -->
+            <p class="desc">{{ weather.desc }}</p>
+
+            <div class="details">
+                <p>Влажность: {{ weather.humidity }}%</p>
+                <p>Ветер: {{ weather.wind }} м/с</p>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+
+
+</body>
+</html>
