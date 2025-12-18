@@ -1,4 +1,4 @@
-/* 1. Сброс и базовые настройки */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,13 +7,13 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Небесный градиент */
+
     background: linear-gradient(to bottom, #89f7fe, #66a6ff);
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* Скрываем полосы прокрутки */
+    overflow: hidden;
     position: relative;
 }
 
@@ -25,7 +25,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: -1; /* !ВАЖНО! Уводим облака на самый задний план */
+    z-index: -1;
     overflow: hidden;
 }
 
@@ -35,7 +35,7 @@ body {
     100% { margin-left: 100%; }
 }
 
-/* Рисуем облака */
+/* облака */
 .cloud {
     background: #fff;
     background: linear-gradient(to bottom,  #fff 5%, #f1f1f1 100%);
@@ -79,8 +79,8 @@ body {
 /*КАРТОЧКА (ПЕРЕДНИЙ ПЛАН)
  */
 .container {
-    background: rgba(255, 255, 255, 0.3); /* Прозрачный белый */
-    backdrop-filter: blur(15px);          /* Размытие фона */
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.5);
     padding: 40px;
@@ -95,7 +95,7 @@ body {
 }
 
 h1 {
-    color: #1e3a8a; /* Тёмно-синий цвет  */
+    color: #1e3a8a;
     text-shadow: 0 1px 2px rgba(255,255,255, 0.5);
     margin-bottom: 20px;
     font-size: 32px;
@@ -108,7 +108,7 @@ form {
     gap: 10px;
     margin-bottom: 30px;
     position: relative;
-    z-index: 20; /* Дополнительная страховка для кнопки */
+    z-index: 20;
 }
 
 input {
@@ -125,7 +125,7 @@ input {
 
 button {
     padding: 12px 25px;
-    background-color: #3b82f6; /* Синий цвет */
+    background-color: #3b82f6;
     color: white;
     border: none;
     border-radius: 8px;
@@ -180,30 +180,30 @@ button:hover {
     margin-bottom: 15px;
     font-weight: bold;
 }
-/* 1. Темное небо */
+
 body.night {
-    /* Темно-синий градиент (Космос) */
+
     background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%);
-    color: white; /* Весь текст белый */
+    color: white;
 }
 
-/* --- ЗВЕЗДЫ (Рисуем кодом, без картинок) --- */
+/* --- ЗВЕЗДЫ --- */
 
 .stars {
-    position: fixed; /* Фиксируем, чтобы не уезжали */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Чтобы сквозь них можно было кликать */
-    z-index: -5; /* На самом заднем плане */
-    display: none; /* Днем скрыты */
+    pointer-events: none;
+    z-index: -5;
+    display: none;
 }
 
 /* Включаем только ночью */
 body.night .stars {
     display: block;
-    /* Рисуем звезды градиентами (белые точки на прозрачном фоне) */
+
     background-image:
         radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
         radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
@@ -213,13 +213,13 @@ body.night .stars {
         radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0));
 
     background-repeat: repeat;
-    background-size: 200px 200px; /* Повторяем этот узор каждые 200px */
+    background-size: 200px 200px;
 
-    /* Анимация мерцания */
+
     animation: twinkle 4s infinite ease-in-out;
 }
 
-/* Эффект мерцания (то ярче, то тусклее) */
+
 @keyframes twinkle {
     0% { opacity: 0.5; transform: scale(1); }
     50% { opacity: 1; transform: scale(1.1); }
@@ -255,7 +255,7 @@ body.night h1 {
 /* Контейнер для иконки и цифры */
 .main-weather {
     display: flex;
-    flex-direction: column; /* Элементы друг под другом */
+    flex-direction: column;
     align-items: center;
     margin: 10px 0;
 }
@@ -267,20 +267,20 @@ body.night h1 {
     filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); /* Подсветка иконки */
 }
 
-/* ОГРОМНАЯ ТЕМПЕРАТУРА */
+/* ТЕМПЕРАТУРА */
 .temp-big {
-    font-size: 90px; /* Очень крупно */
-    font-weight: 800; /* Очень жирно */
+    font-size: 90px;
+    font-weight: 800;
     line-height: 1;
     color: #ffffff;
-    text-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Тень для объема */
-    margin-top: -10px; /* Чуть подтянем к иконке */
+    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    margin-top: -10px;
 }
 
-/* Описание (Облачно и т.д.) */
+/* Описание*/
 .desc {
     font-size: 24px;
-    text-transform: capitalize; /* Первая буква заглавная */
+    text-transform: capitalize;
     margin-bottom: 25px;
     opacity: 0.9;
     color: #f0f9ff;
@@ -288,8 +288,8 @@ body.night h1 {
 
 /* НОЧНОЙ РЕЖИМ для текста */
 body.night .temp-big {
-    color: #ffd700; /* Золотой цвет цифр ночью */
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6); /* Сильное золотое свечение */
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
 }
 
 body.night .desc {

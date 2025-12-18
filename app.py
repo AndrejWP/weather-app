@@ -8,8 +8,8 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 API_KEY = 'ec589e598b051f59d5a0b8a098a07b61'
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather' #запрос на сервер
 #настройка кэширования
-CACHE_TIMEOUT = 300 #5 минут
-weather_cache = {}   # Пустое хранилище
+CACHE_TIMEOUT = 300
+weather_cache = {}
 
 
 def get_weather_from_api(city):
@@ -21,15 +21,15 @@ def get_weather_from_api(city):
     }
     try:
         response = requests.get(BASE_URL, params=params)
-        print(f"LOG: Статус ответа API: {response.status_code}")  # <-- Добавили лог
+        print(f"LOG: Статус ответа API: {response.status_code}")
 
         if response.status_code == 200:
             return response.json()
         else:
-            print(f"LOG: Ответ сервера не 200: {response.text}")  # <-- Узнаем, если API ругается
+            print(f"LOG: Ответ сервера не 200: {response.text}")
 
     except Exception as e:  # <-- Важное изменение!
-        print(f"!!! ОШИБКА ВНУТРИ API ФУНКЦИИ: {e}")  # <-- Теперь мы увидим ошибку
+        print(f"!!! ОШИБКА ВНУТРИ API ФУНКЦИИ: {e}")
         pass
     return None
 #открытие страницы
