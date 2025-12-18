@@ -28,7 +28,7 @@ def get_weather_from_api(city):
         else:
             print(f"LOG: Ответ сервера не 200: {response.text}")
 
-    except Exception as e:  # <-- Важное изменение!
+    except Exception as e:
         print(f"!!! ОШИБКА ВНУТРИ API ФУНКЦИИ: {e}")
         pass
     return None
